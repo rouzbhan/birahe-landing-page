@@ -1,8 +1,991 @@
 {% extends 'base.html' %}
-{% block title %}
-    landing
+{% load static %}
+{% block title %}landing{% endblock %}
+
+{% block style %}
+
+.logo-section{
+    background-color : black;
+    padding : 40px 0;
+    text-align : center;
+}
+.site-logo{
+    max-width : 700px;
+    width : 80%;
+    height : auto;
+    display : inline-block;
+    transition : transform 0.3s ease;
+
+}
+.site-logo:hover{
+    transform:scale(1.05);
+
+}
+@media (max-width:400px){
+    .site-logo{
+        width : 70%;
+        max-width : 300px;
+    }
+}
+.prize-section {
+padding: 50px 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+
+.section-title {
+font-size: 2.8rem;
+text-align: center;
+margin-bottom: 40px;
+}
+
+
+.prize-box {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 30px;
+}
+
+
+.prize-list {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 20px;
+}
+
+.break {
+width: 100%;
+height: 1px;
+background-color: white;
+margin: 1rem 0;
+}
+.prize-item {
+text-align: center;
+}
+
+.amount {
+font-size: 2rem;
+font-weight: 700;
+color: #ff2b2b;
+text-shadow: 0 0 15px #ff2b2b88;
+display: block;
+}
+
+
+.plus {
+font-size: 2rem;
+color: #ff2b2b;
+margin: 0.2rem 0;
+text-shadow: 0 0 10px #ff2b2b66;
+}
+
+
+.label {
+color: #e6e6e6;
+font-size: 1rem;
+margin-top: 5px;
+}
+
+
+.main-prize .amount {
+color: #ff4040;
+}
+
+
+.sub-prize .amount {
+color: #ff6666;
+font-size: 1.4rem;
+}
+
+
+.sub-prizes-row {
+display: flex;
+gap: 50px;
+justify-content: center;
+flex-wrap: wrap;
+}
+
+.tagline {
+margin-top: 20px;
+font-size: 1.05rem;
+color: #ffdede;
+font-weight: 600;
+padding: 8px 18px;
+border-radius: 20px;
+text-align: center;
+box-shadow: 0 0 14px #ff2b2b22;
+}
+
+
+.motivation {
+display: inline-block;
+transform-origin: center;
+animation: pulse 2s infinite ease-in-out;
+font-size: 1.2rem;
+font-weight: 700;
+color: #ff2b2b;
+text-shadow: 0 0 15px #ff2b2b88;
+margin: 2rem 0;
+}
+
+@keyframes pulse {
+0% { transform: scale(1); opacity: 1; }
+50% { transform: scale(1.2); opacity: 0.95; }
+100% { transform: scale(1); opacity: 1; }
+}
+
+
+@media (max-width: 768px) {
+.section-title {
+font-size: 2rem;
+}
+
+.amount {
+font-size: 1.5rem;
+}
+.main-prize .amount {
+font-size: 1.7rem;
+}
+
+.plus {
+font-size: 1.6rem;
+}
+
+.tagline {
+font-size: 1rem;
+padding: 6px 14px;
+}
+
+.motivation {
+font-size: 1rem;
+}
+
+}
+@media (max-width: 480px) {
+  .sub-prizes-row {
+    flex-direction: row;  /* اگر جا شد کنار هم */
+    flex-wrap: wrap;      /* در غیر این صورت پایین بیایند */
+    gap: 10px;
+    justify-content: center;
+  }
+  .sub-prizes-row .prize-item {
+    min-width: 100px;    /* کوچک‌تر کردن برای موبایل */
+  }
+}
+
+.competition-info {
+background-color: #000;
+color: #fff;
+padding: 80px 20px;
+font-family: 'Vazirmatn', sans-serif;
+text-align: center;
+}
+
+
+.info-title {
+font-size: 2.8rem;
+color: #fff;
+margin-bottom: 50px;
+text-shadow: 0 0 15px #ffffff55;
+}
+
+
+.info-row {
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: 10px;
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 20px;
+flex-wrap: wrap;
+}
+
+
+.info-text {
+flex: 1 1 60%;
+text-align: right;
+direction: rtl;
+font-size: 1.05rem;
+line-height: 1.8;
+color: #f5f5f5;
+}
+
+
+.info-text p {
+margin-bottom: 20px;
+}
+
+
+.info-image {
+flex: 0 0 30%;
+display: flex;
+justify-content: center;
+align-items: flex-start;
+}
+
+.info-image img {
+width: 100%;
+max-width: 250px;
+border-radius: 12px;
+border: 2px solid #ff2b2b;
+box-shadow: 0 0 20px #ff2b2b55;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-image img:hover {
+transform: scale(1.05);
+box-shadow: 0 0 35px #ff2b2b99;
+}
+
+
+@media (max-width: 900px) {
+.info-row {
+flex-direction: column;
+align-items: center;
+gap: 30px;
+}
+
+.info-text, .info-image {
+flex: 1 1 100%;
+text-align: center;
+}
+
+.info-image img {
+max-width: 250px;
+}
+
+.info-text {
+font-size: 1rem;
+}
+}
+
+
+.btn.text-danger {
+color: #dc3545 !important;
+border: 1px solid #dc3545;
+transition: background-color 0.3s, color 0.3s;
+}
+.btn.text-danger:hover {
+background-color: #dc3545;
+color: white !important;
+}
+.nav-link {
+transition: color 0.3s;
+}
+.nav-link:hover {
+color: #dc3545 !important;
+}
+
+#navbarNav {
+direction: rtl;
+}
+html{
+    scroll-behaviour : smooth;
+}
+.navbar-nav {
+padding-left: 0;
+text-align: right;
+}
+
+@media (max-width: 991.98px) {
+#navbarNav {
+width: 100%;
+margin-top: 0.5rem;
+}
+}
+body {
+background-color: black !important;
+color: #fff;
+font-family: 'Vazirmatn', sans-serif;
+margin: 0;
+padding: 0;
+line-height: 1.6;
+}
+
+.timeline {
+position: relative;
+max-width: 900px;
+margin: 3rem auto;
+padding: 2rem 0;
+overflow: visible;
+}
+
+.timeline::before {
+content: "";
+position: absolute;
+top: 0;
+bottom: 0;
+left: 50%;
+width: 5px;
+background: white;
+transform: translateX(-50%);
+border-radius: 3px;
+box-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
+z-index: 0;
+}
+
+.timeline::after {
+content: "";
+display: table;
+clear: both;
+}
+
+.timeline-item {
+position: relative;
+width: 50%;
+padding: 1.5rem 2.5rem;
+box-sizing: border-box;
+clear: both;
+background: rgba(255, 255, 255, 0.05);
+border-radius: 10px;
+box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+transition: background-color 0.3s ease;
+}
+
+.timeline-item:hover {
+background: rgba(255, 255, 255, 0.15);
+box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.timeline-item:nth-child(odd) {
+float: left;
+text-align: right;
+padding-right: 3.5rem;
+border-top-right-radius: 0;
+border-bottom-right-radius: 0;
+}
+
+.timeline-item:nth-child(even) {
+float: right;
+text-align: left;
+padding-left: 3.5rem;
+border-top-left-radius: 0;
+border-bottom-left-radius: 0;
+}
+
+.timeline-item .circle-container {
+position: absolute;
+top: 30px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 10;
+flex-shrink: 0;
+transform: none;
+transition: box-shadow 0.3s ease;
+cursor: default;
+}
+
+
+.timeline-item .circle-container.circle-big {
+box-shadow:
+0 0 10px rgba(220, 53, 69, 0.7),
+0 0 20px rgba(220, 53, 69, 0.5),
+inset 0 0 8px rgba(255, 255, 255, 0.4);
+color: white;
+}
+
+
+.timeline-item .circle-container.circle-small {
+background: white;
+border: 4px solid white;
+box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.timeline-item:nth-child(odd) .circle-container.circle-big {
+right: -20px;
+}
+
+.timeline-item:nth-child(odd) .circle-container.circle-small {
+right: -12px;
+}
+
+.timeline-item:nth-child(even) .circle-container.circle-big {
+left: -20px;
+}
+
+.timeline-item:nth-child(even) .circle-container.circle-small {
+left: -12px;
+}
+
+
+.circle-small {
+width: 24px;
+height: 24px;
+}
+
+.circle-big {
+background: red;
+width: 40px;
+height: 40px;
+font-size: 20px;
+box-shadow: inherit;
+}
+
+
+.timeline-item h5 {
+color: white;
+font-weight: 700;
+margin-bottom: 0.3rem;
+font-size: 1.25rem;
+letter-spacing: 0.02em;
+}
+
+.timeline-item small {
+color: #ccc;
+font-size: 0.9rem;
+display: block;
+margin-bottom: 0.75rem;
+font-weight: 500;
+}
+
+.timeline-item p {
+margin: 0;
+color: white;
+font-size: 1rem;
+line-height: 1.4;
+}
+
+
+.circle-big i {
+pointer-events: none;
+user-select: none;
+font-size: 20px;
+color: white;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100%;
+width: 100%;
+transition: color 0.3s ease;
+}
+
+
+.timeline-item:hover .circle-big i {
+color: #ff6666;
+}
+
+
+@media (max-width: 375px) {
+  .timeline {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .timeline-item {
+    padding-left: 3.5rem !important;
+    padding-right: 1rem !important;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+  }
+
+  .timeline-item h5 {
+    font-size: 1rem;
+  }
+
+  .timeline-item small {
+    font-size: 0.8rem;
+  }
+
+  /* Smaller circles on small screens */
+  .circle-small {
+    width: 18px;
+    height: 18px;
+    border-width: 3px !important;
+  }
+
+  .circle-big {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    box-shadow:
+      0 0 8px rgba(220, 53, 69, 0.7),
+      0 0 16px rgba(220, 53, 69, 0.5),
+      inset 0 0 6px rgba(255, 255, 255, 0.4);
+  }
+
+  .timeline-item:nth-child(odd) .circle-container.circle-big {
+    right: -15px !important;
+  }
+
+  .timeline-item:nth-child(odd) .circle-container.circle-small {
+    right: -10px !important;
+  }
+
+  .timeline-item:nth-child(even) .circle-container.circle-big {
+    left: -15px !important;
+  }
+
+  .timeline-item:nth-child(even) .circle-container.circle-small {
+    left: -10px !important;
+  }
+
+  .circle-container {
+    top: 20px !important;
+  }
+}
+
+.red-black-accordion .accordion-item {
+background-color: #000;
+margin-bottom: 1rem;
+border: none;
+}
+
+
+.red-black-accordion .accordion-button {
+background-color: #000;
+color: white;
+font-weight: 500;
+transition: all 0.3s ease;
+box-shadow: none;
+border: none;
+}
+
+
+.red-black-accordion .accordion-button:hover {
+color: #dc3545;
+background-color: #111;
+}
+
+
+.red-black-accordion .accordion-button:not(.collapsed) {
+color: #dc3545;
+background-color: #111;
+box-shadow: 0 0 10px rgba(220, 53, 69, 0.6);
+}
+
+
+.red-black-accordion .accordion-button:focus {
+box-shadow: none;
+}
+
+
+.red-black-accordion .accordion-body {
+color: white;
+background-color: #000;
+padding: 1.25rem;
+}
+
+
+.faq-line {
+border: none;
+height: 1px;
+background-color: transparent;
+margin: 1rem 0;
+}
+.red-section {
+  background-color: red; /* Bootstrap’s red */
+  color: #f8f9fa; /* Light color (like Bootstrap’s light) */
+  text-align: center;
+  padding: 3rem 1rem;
+}
+.footer-section {
+  background-color: #000;
+  color: #fff;
+  padding: 2rem 1rem;
+  font-family: 'Vazirmatn', sans-serif;
+}
+
+.footer-logo {
+  max-width: 300px;
+  height: auto;
+}
+@media (max-width : 344px){
+    width : 300px;
+    height : auto;
+}
+
+.footer-text {
+  color: #fff;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.footer-link {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 0.5rem;
+  font-size: 0.9rem;
+  display: inline-block;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #dc3545;
+  text-shadow: 0 0 6px rgba(220, 53, 69, 0.5);
+}
+
+.footer-link i {
+  margin-left: 0.3rem;
+}
+
 {% endblock %}
 
 {% block content %}
-hello
+<header>
+    <nav class="navbar navbar-dark bg-black py-3">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="تغییر ناوبری">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="#" class="btn text-danger">ثبت نام/ورود</a>
+
+        </div>
+
+
+        <div class="collapse" id="navbarNav" style="direction: rtl;">
+            <ul class="navbar-nav text-end bg-black p-3">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#tozihat">توضیحات</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#timeline">برنامه</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#javayez">جوایز</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#Q&A">سوالات متداول</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#foot">ارتباط با ما</a>
+                </li>
+            </ul>
+        </div>
+
+    </nav>
+</header>
+
+
+
+
+
+
+{% endblock %}
+
+{% block teaser %}
+<section class="logo-section">
+    <div class="container">
+        <img src="{% static 'IMG_6257.png' %}" alt="" class="site-logo">
+    </div>
+</section>
+{% endblock %}
+
+{% block till %}
+<div class="break"></div>
+<section class="red-section">
+  <div class="container">
+    <h2>راز های تاریک پنهان اند و هر سرنخ شما را به حقیقت نزدیک تر می کند . . .</h2>
+    <h4>به دنیای معما وارد شوید و راز های نهفته را آشکار کنید.</h4>
+  </div>
+</section>
+<br>
+<section>
+    <h2 class="info-title d-flex justify-content-center">تیزر مسابقه</h2>
+</section>
+<div class="break"></div>
+{% endblock %}
+
+{% block explain %}
+<section id="tozihat" class="competition-info">
+    <div class="container">
+
+
+        <h2 class="info-title">توضیحات مسابقه</h2>
+
+
+        <div class="info-row">
+
+
+            <div class="info-text">
+                <p>
+                    مستند مسابقه بیراهه : اولین نسخه از سری بازی‌های محیطی انجمن علمی علوم کامپیوترکاشان و گروه فاز
+                    است.در این تجربه‌ی متفاوت، تیم‌های دو یا سه‌نفره وارد روایتی رازآلود می‌شوند ؛ روایتی که در دل
+                    دانشگاه جریان دارد.چیزهایی هست که هیچ‌کس واقعاً در دانشگاه بهشون نگاه نکرده،یک تکه کاغذ جا مانده روی
+                    نیمکت، صدای عجیبی که ناگهان در سکوت پیچیده،یا ردپایی از کسی که انگار، دیگر هرگز بازنمی‌گردد.تنها
+                    نشانه‌هایی باقی مانده ردی از حقیقتی پنهان در میان صداها، سایه‌ها و مسیرهای فراموش‌شده.شما باید این
+                    نشانه‌ها را دنبال کنید، معماها را حل کنید و از دل بیراهه، راز این روایت را آشکار سازید.اما حواستان
+                    باشد در بیراهه، هیچ چیز آن‌طور که به نظر می‌رسد نیست، آیا آماده‌ای توی بیراهه قدم بزاری؟
+                </p>
+            </div>
+
+
+            <div class="info-image">
+                <img src="{% static 'IMG_6232.png' %}" alt="">
+            </div>
+
+        </div>
+    </div>
+</section>
+<div class="break"></div>
+{% endblock %}
+
+
+{% block timeline %}
+<div class="container mt-5" id="timeline">
+    <h2 class="text-center my-4 text-light">تایم‌لاین</h2>
+    <div class="timeline">
+
+
+        <div class="timeline-item">
+            <div class="circle-container circle-small"></div>
+            <h5>۳ آبان</h5>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="circle-container circle-big">
+                <i class="fas fa-pen"></i>
+            </div>
+            <h5>ثبت نام</h5>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="circle-container circle-small"></div>
+            <h5>۹ آبان</h5>
+        </div>
+
+        <div class="timeline-item">
+            <div class="circle-container circle-small"></div>
+            <h5>۱۰ آبان</h5>
+
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="circle-container circle-big">
+                <i class="fas fa-flag"></i>
+            </div>
+            <h5>مرحله مقدماتی</h5>
+        </div>
+
+        <div class="timeline-item">
+            <div class="circle-container circle-small"></div>
+            <h5>۱۴ آبان</h5>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="circle-container circle-big">
+                <i class="fas fa-fire"></i>
+            </div>
+            <h5 class="mt-1">مرحله نهایی</h5>
+            <small>۱۶ آبان</small>
+        </div>
+
+
+        <div class="timeline-item">
+            <div class="circle-container circle-big">
+                <i class="fas fa-award"></i>
+            </div>
+            <h5 class="mt-1">اختتامیه</h5>
+            <small>۱۸ آبان</small>
+        </div>
+
+    </div>
+</div>
+<!--
+۱. چگونه می‌توان در مسابقه «بیراهه» شرکت کرد؟ فرآیند ثبت‌نام در مسابقه «بیراهه» به‌صورت آنلاین و از طریق همین سامانه انجام می‌شود. شرکت‌کنندگان ابتدا باید اطلاعات لازم شامل نام تیم، اعضای تیم (دو یا سه نفر) و اطلاعات را در فرم ثبت‌نام وارد کنند. پس از تکمیل فرم، لازم است پرداخت هزینه‌ی ثبت‌نام به‌صورت اینترنتی از طریق درگاه امن پرداخت انجام شود. پس از ثبت موفق اطلاعات و پرداخت، فرآیند ثبت‌نام به پایان می‌رسد Nemidonam, [Oct 16, 2025 at 00:08] ۲. هزینه‌ی ثبت‌نام در مسابقه «بیراهه» چقدر است؟ هزینه‌ی شرکت در مسابقه «بیراهه» بر اساس بازه‌ی زمانی ثبت‌نام تعیین می‌شود و شامل دو مرحله است: • ثبت‌نام زودهنگام (۳ تا ۷ آبان): مبلغ ۱۷۹ هزار تومان • ثبت‌نام عادی (۷ تا ۹ آبان): مبلغ ۲۳۹ هزار تومان پرداخت هزینه تنها از طریق درگاه رسمی و امن آنلاین مسابقه انجام می‌شود و پس از تکمیل موفق فرآیند پرداخت، ثبت‌نام تیم قطعی خواهد شد. Nemidonam, [Oct 16, 2025 at 00:11] ۳. مهلت ثبت‌نام در مسابقه «بیراهه» تا چه زمانی است؟ فرآیند ثبت‌نام در مسابقه «بیراهه» از تاریخ ۳ آبان آغاز می‌شود و تا ساعت ۲۳:۵۹ روز ۹ آبان ادامه دارد Nemidonam, [Oct 16, 2025 at 00:19] ۴. هر تیم چند نفر می‌تواند باشد و شرایط جوایز چگونه است؟ تیم‌های شرکت‌کننده می‌توانند دو یا سه نفره باشند. در بخش جوایز، علاوه بر جوایز اصلی، جایزه‌ای ویژه برای برترین تیم ورودی ۱۴۰۴ در نظر گرفته شده است. در صورتی که یکی از تیم‌های ورودی ۱۴۰۴ برنده‌ی جوایز اصلی شود، این جایزه به دومین تیم برتر از همان ورودی تعلق می‌گیرد Nemidonam, [Oct 16, 2025 at 00:29] ۵. چطور می‌توانم با تیم پشتیبانی در ارتباط باشم؟ در صورت بروز هرگونه مشکل، ابهام یا نیاز به راهنمایی در فرآیند ثبت‌نام و شرکت در مسابقه، می‌توانید از طریق حساب رسمی تلگرام پشتیبانی به آدرس @FAZ_group_support با تیم برگزارکننده در ارتباط باش
+-->
+<div class="break"></div>
+{% endblock %}
+{% block javayez %}
+<section id="javayez" class="prize-section mt-2">
+    <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+
+
+        <h1 class="section-title text-light">جوایز مسابقه</h1>
+
+
+        <div class="prize-box">
+            <div class="prize-list">
+
+
+                <div class="prize-item main-prize">
+                    <span class="amount">۱۰ میلیون تومان</span>
+                    <p class="label">جایزه بزرگ مسابقه</p>
+                </div>
+
+
+                <div class="sub-prizes-row">
+                    <div class="prize-item sub-prize">
+                        <span class="amount">۲ میلیون تومان</span>
+                        <p class="label">جایزه برترین تیم ورودی ۱۴۰۴</p>
+                    </div>
+
+                    <p class="plus middle-plus">+</p>
+
+                    <div class="prize-item sub-prize">
+                        <span class="amount">۱ میلیون تومان</span>
+                        <p class="label">جایزه بهترین تصویر ثبت‌شده</p>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <p class="tagline motivation">هر معما، یک قدم به جایزه نزدیک‌تر</p>
+
+        </div>
+    </div>
+</section>
+<div class="dark"></div>
+{% endblock %}
+{% block QA %}
+<section class="container my-5" style="direction: rtl;" id="Q&A">
+    <h2 class="text-center text-white mb-4">سوالات متداول</h2>
+
+    <div class="accordion red-black-accordion" id="faqAccordion">
+
+
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q1"
+                    aria-expanded="false" aria-controls="q1">
+                    ۱. چگونه می‌توان در مسابقه «بیراهه» شرکت کرد؟ </button>
+            </h2>
+            <div id="q1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    <hr class="faq-line">
+                    فرآیند ثبت‌نام در مسابقه «بیراهه» به‌صورت آنلاین و از طریق همین سامانه انجام می‌شود.
+                    شرکت‌کنندگان ابتدا باید اطلاعات لازم شامل نام تیم، اعضای تیم (دو یا سه نفر) و اطلاعات را در فرم
+                    ثبت‌نام وارد کنند. پس از تکمیل فرم، لازم است پرداخت هزینه‌ی ثبت‌نام به‌صورت اینترنتی از طریق درگاه
+                    امن پرداخت انجام شود.
+                    پس از ثبت موفق اطلاعات و پرداخت، فرآیند ثبت‌نام به پایان می‌رسد
+                    <hr class="faq-line">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2"
+                    aria-expanded="false" aria-controls="q2">
+                    ۲. هزینه‌ی ثبت‌نام در مسابقه «بیراهه» چقدر است؟ </button>
+            </h2>
+            <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    <hr class="faq-line">
+                    هزینه‌ی شرکت در مسابقه «بیراهه» بر اساس بازه‌ی زمانی ثبت‌نام تعیین می‌شود و شامل دو مرحله است:
+                    • ثبت‌نام زودهنگام (۳ تا ۷ آبان): مبلغ ۱۷۹ هزار تومان
+                    • ثبت‌نام عادی (۷ تا ۹ آبان): مبلغ ۲۳۹ هزار تومان
+                    پرداخت هزینه تنها از طریق درگاه رسمی و امن آنلاین مسابقه انجام می‌شود و پس از تکمیل موفق فرآیند
+                    پرداخت، ثبت‌نام تیم قطعی خواهد شد.
+                    <hr class="faq-line">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3"
+                    aria-expanded="false" aria-controls="q3">
+                    ۳. مهلت ثبت‌نام در مسابقه «بیراهه» تا چه زمانی است؟
+                </button>
+            </h2>
+            <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    <hr class="faq-line">
+                    فرآیند ثبت‌نام در مسابقه «بیراهه» از تاریخ ۳ آبان آغاز می‌شود و تا ساعت ۲۳:۵۹ روز ۹ آبان ادامه دارد
+                    <hr class="faq-line">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="accordion-item container">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q4"
+                    aria-expanded="false" aria-controls="q4">
+                    ۴. هر تیم چند نفر می‌تواند باشد و شرایط جوایز چگونه است؟ </button>
+            </h2>
+            <div id="q4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    <hr class="faq-line">
+                    تیم‌های شرکت‌کننده می‌توانند دو یا سه نفره باشند.
+
+                    در بخش جوایز، علاوه بر جوایز اصلی، جایزه‌ای ویژه برای برترین تیم ورودی ۱۴۰۴ در نظر گرفته شده است.
+                    در صورتی که یکی از تیم‌های ورودی ۱۴۰۴ برنده‌ی جوایز اصلی شود، این جایزه به دومین تیم برتر از همان
+                    ورودی تعلق می‌گیرد
+                    <hr class="faq-line">
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q5"
+                    aria-expanded="false" aria-controls="q5">
+                    ۵. چطور می‌توانم با تیم پشتیبانی در ارتباط باشم؟
+                </button>
+            </h2>
+            <div id="q5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    <hr class="faq-line">
+                    در صورت بروز هرگونه مشکل، ابهام یا نیاز به راهنمایی در فرآیند ثبت‌نام و شرکت در مسابقه، می‌توانید از
+                    طریق حساب رسمی تلگرام پشتیبانی به آدرس
+                    @FAZ_group_support
+                    با تیم برگزارکننده در ارتباط باشید.
+                    <hr class="faq-line">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
+{% block footer %}
+<div class="break"></div>
+<footer dir="ltr" class="footer-section" id="foot">
+  <div class="container">
+    <div class="row text-center text-md-start align-items-center gy-4">
+
+      <!-- Left: Logo -->
+      <div class="col-12 col-md-4">
+        <img src="{% static 'IMG_6256.png' %}" alt="" class="footer-logo mx-auto mx-md-0 d-block">
+      </div>
+
+      <!-- Middle: Text -->
+      <div class="col-12 col-md-4">
+        <p class="footer-text mb-0 text-center">
+            ما گروه فاز هستیم؛ تیمی دانشجویی که به‌تازگی فعالیت خود را آغاز کرده و هدفمان خلق تجربه‌های خلاقانه و متفاوت در زمینه‌های مختلف کامپیوتر است. این گروه قصد دارد با برنامه‌های متنوع و نوآورانه، یک محیط آموزشی پویا و تعاملی در دانشگاه رقم بزند تا دانشجویان بتوانند مهارت‌های عملی و خلاقیت خود را در آن توسعه دهند.اولین تجربه‌ی ما، مسابقه‌ی بیراهه است؛ یک بازی رازآلود و تعاملی که با حمایت معاونت فرهنگی دانشگاه دولتی کاشان طراحی و اجرا شد.
+        </p>
+      </div>
+
+      <!-- Right: Social Links -->
+      <div class="col-12 col-md-4 text-center text-md-end">
+  <h5 class="footer-heading mb-2">:ارتباط با ما</h5>
+  
+  <div class="d-flex flex-column align-items-center align-items-md-end">
+    <a href="https://t.me/FAZ_group" target="_blank" class="footer-link mb-1">
+      <i class="fab fa-telegram"></i> تلگرام
+    </a>
+    <a href="https://www.instagram.com/fazgroup_ir?igsh=eng4bzUydnYybm02" target="_blank" class="footer-link">
+      <i class="fab fa-instagram"></i> اینستاگرام
+    </a>
+  </div>
+  <p class="footer-text mb-2">
+    <a href="https://t.me/FAZ_group_support" target="_blank" class="footer-link">@FAZ_group_support</a>
+  </p>
+  <p class="footer-text mb-0 text-center">
+    گروه پشتیبانی فاز - همه حقوق محفوظ است
+</p>
+</div>
+
+    </div>
+  </div>
+</footer>
+
 {% endblock %}
